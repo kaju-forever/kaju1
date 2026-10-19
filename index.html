@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kavu & Jiju — The Wedding Celebration</title>
+  <meta name="description" content="Join us in celebrating the wedding of Kavu & Jiju. Wedding in Hyderabad on Dec 18, 2026 and Grand Reception in Borigumma, Odisha on Dec 23, 2026." />
+  
+  <!-- Favicon with golden rings / lotus icon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: {
+              DEFAULT: '#FAF7F2',
+              50: '#FFFFFF',
+              100: '#FAF7F2',
+              200: '#F5EFE6',
+              300: '#EBDDCB',
+              400: '#DEC6AD'
+            },
+            maroon: {
+              DEFAULT: '#800020',
+              50: '#FDF2F4',
+              100: '#FCE7EB',
+              200: '#F7C2CB',
+              600: '#9E1B32',
+              700: '#800020',
+              800: '#5F0018',
+              900: '#400010'
+            },
+            gold: {
+              DEFAULT: '#D4AF37',
+              50: '#FCF9EE',
+              100: '#FAF4DD',
+              200: '#F3E5AB',
+              300: '#E8D279',
+              400: '#D4AF37',
+              500: '#BF9824',
+              600: '#99781B',
+              dark: '#856404'
+            },
+            charcoal: {
+              DEFAULT: '#2C2C2C',
+              light: '#4A4A4A',
+              muted: '#666666'
+            }
+          },
+          fontFamily: {
+            script: ['"Great Vibes"', 'cursive'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Montserrat"', '"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            'gold': '0 4px 20px -2px rgba(212, 175, 55, 0.25)',
+            'gold-lg': '0 10px 30px -3px rgba(212, 175, 55, 0.35)',
+            'royal': '0 20px 40px -15px rgba(128, 0, 32, 0.15)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D4AF37;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #800020;
+    }
+
+    /* Keyframe Animations */
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.8);
+      }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .shimmer-text {
+      background: linear-gradient(90deg, #D4AF37 0%, #FFF3C4 50%, #D4AF37 100%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* Fade-in on scroll helper classes */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+    .delay-400 { transition-delay: 400ms; }
+
+    /* Canvas styling */
+    #petals-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 30;
+    }
+  </style>
+</head>
+
+<body class="bg-cream text-charcoal font-sans antialiased overflow-x-hidden selection:bg-gold selection:text-maroon-900">
+
+  <!-- Interactive Floating Background Canvas (Marigold & Golden Petals) -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- ========================================================================= -->
+  <!-- A. FLOATING AUDIO TOGGLE & STICKY NAVIGATION -->
+  <!-- ========================================================================= -->
+
+  <!-- Floating Audio Player Button (Bottom-Right) -->
+  <div class="fixed bottom-6 right-6 z-50 flex items-center space-x-3">
+    <!-- Floating Gentle Prompt (Shown only if browser blocks unprompted autoplay) -->
+    <div id="music-banner" class="hidden absolute bottom-16 right-0 bg-maroon-900/95 text-gold-200 border border-gold/70 px-4 py-2 rounded-2xl shadow-royal backdrop-blur-md text-xs font-semibold whitespace-nowrap cursor-pointer hover:scale-105 transition-all animate-pulse flex items-center space-x-1.5">
+      <span>🎵 Tap anywhere to play wedding music</span>
+    </div>
+
+    <!-- Music Notification Tooltip -->
+    <div id="audio-tooltip" class="hidden md:flex items-center bg-maroon-800/95 text-gold-200 text-xs px-3.5 py-2 rounded-full shadow-lg border border-gold/40 backdrop-blur-sm transition-all duration-300 transform translate-x-2 opacity-0 pointer-events-none">
+      <span>Play Wedding Music 🎵</span>
+    </div>
+
+    <!-- Toggle Button -->
+    <button id="audio-toggle-btn" 
+            aria-label="Toggle Background Music" 
+            class="group relative flex items-center justify-center w-14 h-14 rounded-full bg-maroon text-gold-200 border-2 border-gold shadow-gold-lg hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gold/60">
+      
+      <!-- Outer Pulsing Glow Effect -->
+      <span id="audio-pulse" class="absolute inset-0 rounded-full bg-gold/30 animate-ping opacity-0"></span>
+
+      <!-- Speaker Playing Icon -->
+      <svg id="icon-sound-on" class="w-6 h-6 hidden text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+      </svg>
+
+      <!-- Speaker Muted Icon -->
+      <svg id="icon-sound-off" class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- HTML5 Audio Element with local folder support + fallback -->
+  <!-- REPLACE HERE: [AUDIO_FILE_URL] - Drop your song into assets/audio/wedding-song.mp3 -->
+  <audio id="wedding-audio" autoplay loop preload="auto" playsinline webkit-playsinline>
+    <source src="assets/audio/wedding-song.mp3" type="audio/mp3">
+    <source src="https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Sticky Translucent Navigation Bar -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 bg-cream/85 backdrop-blur-md border-b border-gold/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Monogram -->
+        <a href="#hero" class="flex items-center space-x-2 group">
+          <span class="font-serif text-2xl tracking-wider text-maroon font-bold group-hover:text-gold transition-colors duration-200">
+            K <span class="font-script text-3xl text-gold font-normal mx-0.5">&</span> J
+          </span>
+          <span class="text-xs uppercase tracking-widest text-maroon/70 hidden sm:inline-block font-sans border-l border-gold/40 pl-2">
+            The Wedding
+          </span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+          <a href="#hero" class="text-charcoal hover:text-maroon transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gold hover:after:w-full after:transition-all">Home</a>
+          <a href="#story" class="text-charcoal hover:text-maroon transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gold hover:after:w-full after:transition-all">Our Story</a>
+          <a href="#events" class="text-charcoal hover:text-maroon transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gold hover:after:w-full after:transition-all">Events</a>
+          <a href="#gallery" class="text-charcoal hover:text-maroon transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gold hover:after:w-full after:transition-all">Gallery</a>
+          <a href="#location" class="bg-maroon text-cream-50 px-5 py-2 rounded-full border border-gold hover:bg-maroon-600 transition-all shadow-sm hover:shadow-gold hover:scale-105 active:scale-95 text-xs font-semibold tracking-wider uppercase">Venues & Maps</a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="text-maroon p-2 rounded-md hover:text-gold focus:outline-none">
+            <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-cream/95 backdrop-blur-xl border-b border-gold/40 px-6 pt-3 pb-6 space-y-3 shadow-royal">
+      <a href="#hero" class="mobile-nav-link block text-base font-serif text-maroon hover:text-gold py-2 border-b border-gold/10">Home</a>
+      <a href="#story" class="mobile-nav-link block text-base font-serif text-maroon hover:text-gold py-2 border-b border-gold/10">Our Story</a>
+      <a href="#events" class="mobile-nav-link block text-base font-serif text-maroon hover:text-gold py-2 border-b border-gold/10">Events Schedule</a>
+      <a href="#gallery" class="mobile-nav-link block text-base font-serif text-maroon hover:text-gold py-2 border-b border-gold/10">Gallery</a>
+      <a href="#location" class="mobile-nav-link block text-center bg-maroon text-gold font-medium py-2.5 rounded-full border border-gold mt-3 shadow-md">Venues & Maps</a>
+    </div>
+  </nav>
+
+  <!-- ========================================================================= -->
+  <!-- B. HERO SECTION (FULL VIEWPORT) -->
+  <!-- ========================================================================= -->
+  <header id="hero" class="relative min-h-screen flex items-center justify-center text-center px-4 overflow-hidden pt-20 pb-16">
+    
+    <!-- Hero Background Image (Supports assets/images/hero.jpg with online fallback) -->
+    <!-- REPLACE HERE: [HERO_IMAGE_URL] - Place photo in assets/images/hero.jpg -->
+    <div id="hero-bg" class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-105"
+         style="background-image: url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=2000&q=85');">
+    </div>
+
+    <!-- Dark Layered Gradient Overlay for Text Readability -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/55 to-maroon-900/85"></div>
+    
+    <!-- Royal Motif Background Watermark -->
+    <div class="absolute inset-0 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none"></div>
+
+    <!-- Hero Content Container -->
+    <div class="relative z-10 max-w-4xl mx-auto text-cream-50 py-12 flex flex-col items-center">
+      
+      <!-- Auspicious Invocation Header -->
+      <div class="reveal-on-scroll flex items-center justify-center space-x-3 mb-4">
+        <span class="h-px w-10 sm:w-16 bg-gradient-to-r from-transparent to-gold"></span>
+        <span class="text-gold tracking-[0.25em] text-sm sm:text-base font-serif italic uppercase font-semibold">
+          ॥ श्री गणेशाय नमः ॥
+        </span>
+        <span class="h-px w-10 sm:w-16 bg-gradient-to-l from-transparent to-gold"></span>
+      </div>
+
+      <p class="reveal-on-scroll delay-100 text-xs sm:text-sm uppercase tracking-[0.35em] text-cream-200/90 font-medium mb-3">
+        Together with their families
+      </p>
+
+      <!-- Centerpiece Couple Names: Kavu & Jiju -->
+      <!-- REPLACE HERE: [BRIDE_NAME] & [GROOM_NAME] -->
+      <h1 class="reveal-on-scroll delay-200 font-script text-6xl sm:text-8xl md:text-9xl text-white tracking-normal my-2 filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+        Kavu <span class="text-gold font-normal font-serif text-5xl sm:text-7xl">&</span> Jiju
+      </h1>
+
+      <!-- Elegant Divider Graphic -->
+      <div class="reveal-on-scroll delay-300 flex items-center justify-center my-4 space-x-4">
+        <span class="w-16 sm:w-28 h-px bg-gold/60"></span>
+        <svg class="w-7 h-7 text-gold" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C12.5 5 15 7.5 17 8C19 8.5 21 8.5 22 8C21.5 10.5 19.5 12.5 17 13.5C18.5 15.5 20 18 20 19C18 19 15.5 18 13.5 16.5C13 18.5 12 21 12 22C12 21 11 18.5 10.5 16.5C8.5 18 6 19 4 19C4 18 5.5 15.5 7 13.5C4.5 12.5 2.5 10.5 2 8C3 8.5 5 8.5 7 8C9 7.5 11.5 5 12 2Z"/>
+        </svg>
+        <span class="w-16 sm:w-28 h-px bg-gold/60"></span>
+      </div>
+
+      <!-- Tagline & Wedding Dates Display -->
+      <!-- REPLACE HERE: [WEDDING_DATE_DISPLAY] -->
+      <p class="reveal-on-scroll delay-300 font-serif text-xl sm:text-2xl text-cream-100 tracking-wide mb-2 italic">
+        Are getting married!
+      </p>
+      
+      <div class="reveal-on-scroll delay-300 space-y-1 mb-8">
+        <p class="text-gold-300 font-sans tracking-[0.2em] uppercase text-xs sm:text-sm font-semibold">
+          Wedding: December 18, 2026 • Candeur 40, Miyapur, Hyderabad
+        </p>
+        <p class="text-gold-200/90 font-sans tracking-[0.18em] uppercase text-xs sm:text-xs font-medium">
+          Grand Reception: December 23, 2026 • Borigumma, Odisha
+        </p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="reveal-on-scroll delay-400 flex flex-col sm:flex-row items-center gap-4">
+        <!-- Save the date CTA Button -->
+        <a href="#events" 
+           class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-gold text-maroon-900 font-semibold text-xs sm:text-sm tracking-widest uppercase hover:bg-gold-200 transition-all duration-300 shadow-gold-lg hover:scale-105 active:scale-95 group">
+          <span>View Celebrations</span>
+          <svg class="w-4 h-4 ml-2 transform group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+
+        <!-- Venues & Directions Link -->
+        <a href="#location" 
+           class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-black/40 backdrop-blur-sm text-cream-100 border border-gold/70 font-semibold text-xs sm:text-sm tracking-widest uppercase hover:bg-gold hover:text-maroon-900 transition-all duration-300 hover:scale-105 active:scale-95">
+          Venues & Directions
+        </a>
+      </div>
+
+      <!-- Scroll Down Indicator -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
+        <span class="text-[10px] uppercase tracking-widest text-gold-200 mb-1">Scroll</span>
+        <svg class="w-5 h-5 text-gold animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- C. LIVE COUNTDOWN TIMER (TO WEDDING DAY: DEC 18, 2026) -->
+  <!-- ========================================================================= -->
+  <!-- REPLACE HERE: [WEDDING_DATETIME_ISO] - Target timestamp in ISO format (2026-12-18T10:00:00) -->
+  <section id="countdown-section" class="relative z-20 -mt-10 sm:-mt-14 max-w-4xl mx-auto px-4">
+    <div class="reveal-on-scroll bg-cream-50/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-royal border border-gold/50">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-6">
+        <span class="text-xs uppercase tracking-[0.25em] text-maroon font-semibold">Counting Down To The Sacred Vows</span>
+        <h2 class="font-serif text-2xl sm:text-3xl text-charcoal mt-1">Days Until We Say "I Do"</h2>
+        <p class="text-xs text-charcoal/60 mt-1">December 18, 2026 • Candeur 40, Miyapur, Hyderabad</p>
+      </div>
+
+      <!-- 4-Box Countdown Timer Grid -->
+      <div class="grid grid-cols-4 gap-2 sm:gap-6 text-center">
+        
+        <!-- Days Card -->
+        <div class="bg-cream-200/60 rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-gold/30 shadow-inner flex flex-col items-center">
+          <span id="timer-days" class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-maroon">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-charcoal/70 font-semibold mt-1">Days</span>
+        </div>
+
+        <!-- Hours Card -->
+        <div class="bg-cream-200/60 rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-gold/30 shadow-inner flex flex-col items-center">
+          <span id="timer-hours" class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-maroon">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-charcoal/70 font-semibold mt-1">Hours</span>
+        </div>
+
+        <!-- Minutes Card -->
+        <div class="bg-cream-200/60 rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-gold/30 shadow-inner flex flex-col items-center">
+          <span id="timer-minutes" class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-maroon">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-charcoal/70 font-semibold mt-1">Minutes</span>
+        </div>
+
+        <!-- Seconds Card -->
+        <div class="bg-cream-200/60 rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-gold/30 shadow-inner flex flex-col items-center">
+          <span id="timer-seconds" class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-maroon">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-charcoal/70 font-semibold mt-1">Seconds</span>
+        </div>
+
+      </div>
+
+      <!-- Auspicious Sanskrit blessing line -->
+      <p class="text-center font-serif italic text-gold-dark text-xs sm:text-sm mt-6">
+        "मंगलम् भगवान विष्णुः, मंगलम् गरुड़ध्वजः । मंगलम् पुण्डरीकाक्षः, मंगलाय तनो हरिः ॥"
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- D. COUPLE & STORY SECTION ("HOW WE MET") -->
+  <!-- ========================================================================= -->
+  <section id="story" class="py-24 sm:py-32 px-4 max-w-6xl mx-auto">
+    
+    <!-- Section Title -->
+    <div class="reveal-on-scroll text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">The Happy Couple</span>
+      <h2 class="font-serif text-4xl sm:text-5xl text-maroon mt-2 mb-4 font-bold">Two Souls, One Destiny</h2>
+      <div class="w-20 h-0.5 bg-gold mx-auto mb-4"></div>
+      <p class="font-sans text-sm sm:text-base text-charcoal-muted leading-relaxed">
+        From wonderful shared laughs and unforgettable moments to lifelong companionship, here is where our forever begins.
+      </p>
+    </div>
+
+    <!-- Side-by-Side Couple Profile Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14 mb-24">
+      
+      <!-- Bride Card: Kavu -->
+      <div class="reveal-on-scroll bg-white rounded-3xl p-6 sm:p-8 shadow-royal border border-gold/40 relative group hover:shadow-gold-lg transition-all duration-300">
+        <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center text-maroon text-xs font-serif font-bold border border-gold">
+          🌸
+        </div>
+        
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left">
+          <!-- REPLACE HERE: [BRIDE_IMAGE_URL] - Drop photo in assets/images/bride.jpg -->
+          <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border-2 border-gold flex-shrink-0 shadow-md">
+            <img src="assets/images/bride.jpg" 
+                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80';"
+                 alt="The Bride - Kavu" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          </div>
+
+          <div class="flex-1">
+            <span class="text-xs font-semibold uppercase tracking-widest text-gold-dark">The Bride</span>
+            <!-- REPLACE HERE: [BRIDE_NAME] -->
+            <h3 class="font-serif text-3xl text-maroon font-bold mt-1">Kavu</h3>
+            <p class="text-xs text-charcoal/60 uppercase tracking-wider mb-3">Graceful, Loving & Cheerful</p>
+            <!-- REPLACE HERE: [BRIDE_BIO] -->
+            <p class="text-xs sm:text-sm text-charcoal/80 leading-relaxed italic font-serif">
+              "A joyful soul who radiates warmth wherever she goes, with an infectious laughter that makes every moment magical. Excited to begin this beautiful journey with Jiju."
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Groom Card: Jiju -->
+      <div class="reveal-on-scroll delay-100 bg-white rounded-3xl p-6 sm:p-8 shadow-royal border border-gold/40 relative group hover:shadow-gold-lg transition-all duration-300">
+        <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center text-maroon text-xs font-serif font-bold border border-gold">
+          ✨
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left">
+          <!-- REPLACE HERE: [GROOM_IMAGE_URL] - Drop photo in assets/images/groom.jpg -->
+          <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border-2 border-gold flex-shrink-0 shadow-md">
+            <img src="assets/images/groom.jpg" 
+                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80';"
+                 alt="The Groom - Jiju" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          </div>
+
+          <div class="flex-1">
+            <span class="text-xs font-semibold uppercase tracking-widest text-gold-dark">The Groom</span>
+            <!-- REPLACE HERE: [GROOM_NAME] -->
+            <h3 class="font-serif text-3xl text-maroon font-bold mt-1">Jiju</h3>
+            <p class="text-xs text-charcoal/60 uppercase tracking-wider mb-3">Warmhearted, Dedicated & Adventurous</p>
+            <!-- REPLACE HERE: [GROOM_BIO] -->
+            <p class="text-xs sm:text-sm text-charcoal/80 leading-relaxed italic font-serif">
+              "A dependable confidant and genuine romantic, who knew from their first conversations that Kavu brought a light and laughter to his world that he'd cherish for eternity."
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Vertical Milestones Timeline ("How We Met") -->
+    <div class="max-w-3xl mx-auto">
+      <div class="reveal-on-scroll text-center mb-12">
+        <h3 class="font-serif text-3xl text-charcoal font-semibold">Our Journey Together</h3>
+        <p class="text-xs uppercase tracking-widest text-gold-dark mt-1">Milestones Of Our Love Story</p>
+      </div>
+
+      <!-- Timeline Container -->
+      <div class="relative border-l-2 border-gold/50 ml-4 sm:ml-32 pl-6 sm:pl-10 space-y-12">
+        
+        <!-- Milestone 1 -->
+        <div class="reveal-on-scroll relative group">
+          <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-6 h-6 rounded-full bg-cream-50 border-4 border-maroon group-hover:border-gold transition-colors"></div>
+          
+          <span class="sm:absolute sm:-left-32 sm:top-1 text-xs font-bold uppercase tracking-wider text-gold-dark block mb-1 sm:mb-0">
+            The Beginning
+          </span>
+
+          <div class="bg-white p-5 rounded-2xl border border-gold/30 shadow-sm hover:shadow-md transition-shadow">
+            <h4 class="font-serif text-xl font-bold text-maroon">When Two Paths Crossed</h4>
+            <p class="text-xs font-semibold text-charcoal/60 uppercase tracking-wide mb-2">A Serendipitous Connection</p>
+            <p class="text-xs sm:text-sm text-charcoal-muted leading-relaxed">
+              What started as friendly introductions quickly evolved into hours of laughter, deep conversations, shared dreams, and an instant feeling of feeling right at home with each other.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 2 -->
+        <div class="reveal-on-scroll delay-100 relative group">
+          <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-6 h-6 rounded-full bg-cream-50 border-4 border-maroon group-hover:border-gold transition-colors"></div>
+          
+          <span class="sm:absolute sm:-left-32 sm:top-1 text-xs font-bold uppercase tracking-wider text-gold-dark block mb-1 sm:mb-0">
+            The Decision
+          </span>
+
+          <div class="bg-white p-5 rounded-2xl border border-gold/30 shadow-sm hover:shadow-md transition-shadow">
+            <h4 class="font-serif text-xl font-bold text-maroon">Two Families Unite</h4>
+            <p class="text-xs font-semibold text-charcoal/60 uppercase tracking-wide mb-2">Blessings & Shared Joy</p>
+            <p class="text-xs sm:text-sm text-charcoal-muted leading-relaxed">
+              With the affectionate blessings of both our families, sweet treats, and joyful celebrations, we decided to step together into a lifetime of love and shared adventures.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 3 -->
+        <div class="reveal-on-scroll delay-200 relative group">
+          <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-6 h-6 rounded-full bg-cream-50 border-4 border-gold group-hover:border-maroon transition-colors"></div>
+          
+          <span class="sm:absolute sm:-left-32 sm:top-1 text-xs font-bold uppercase tracking-wider text-gold-dark block mb-1 sm:mb-0">
+            Dec 2026
+          </span>
+
+          <div class="bg-white p-5 rounded-2xl border-2 border-gold shadow-gold transition-shadow">
+            <h4 class="font-serif text-xl font-bold text-maroon">The Wedding & Reception</h4>
+            <p class="text-xs font-semibold text-charcoal/60 uppercase tracking-wide mb-2">Hyderabad (Dec 18) & Borigumma (Dec 23)</p>
+            <p class="text-xs sm:text-sm text-charcoal-muted leading-relaxed">
+              The grand celebration begins with the sacred pheras at Candeur 40 in Hyderabad, followed by a royal feast and reception with loved ones in Borigumma, Odisha!
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- E. WEDDING EVENTS SCHEDULE (MULTI-CARD GRID ACROSS DATES) -->
+  <!-- ========================================================================= -->
+  <section id="events" class="py-24 bg-cream-200/50 border-y border-gold/30 px-4">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="reveal-on-scroll text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-[0.3em] text-maroon font-semibold">Celebrations & Itinerary</span>
+        <h2 class="font-serif text-4xl sm:text-5xl text-charcoal mt-2 mb-4 font-bold">Wedding Ceremonies</h2>
+        <div class="w-20 h-0.5 bg-gold mx-auto mb-4"></div>
+        <p class="font-sans text-sm text-charcoal-muted">
+          Join us for the celebrations across Hyderabad and Odisha as we tie the knot and celebrate with family and friends!
+        </p>
+      </div>
+
+      <!-- 4-Card Responsive Grid for All Ceremonies -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Event 1: Haldi & Mehendi (Hyderabad) -->
+        <div class="reveal-on-scroll bg-white rounded-3xl overflow-hidden border border-gold/40 shadow-royal hover:-translate-y-2 hover:shadow-gold-lg transition-all duration-300 flex flex-col">
+          <div class="h-36 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?auto=format&fit=crop&w=800&q=80');">
+            <div class="absolute inset-0 bg-gradient-to-t from-maroon-900/90 via-maroon-900/30 to-transparent"></div>
+            <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
+              <span class="text-[11px] uppercase tracking-widest bg-gold text-maroon-900 font-bold px-2.5 py-0.5 rounded-full">Hyderabad</span>
+              <span class="text-[11px] font-medium text-cream-100">🌿 Haldi Ceremony</span>
+            </div>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-maroon mb-1">Haldi & Mehendi</h3>
+              <p class="text-[11px] text-charcoal/60 uppercase tracking-wider mb-4">Auspicious Yellows & Henna</p>
+
+              <div class="space-y-2.5 text-xs text-charcoal/90 mb-5">
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">📅</span>
+                  <span><strong>Date:</strong> Dec 16, 2026</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">⏰</span>
+                  <span><strong>Time:</strong> 10:30 AM onwards</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">📍</span>
+                  <span><strong>Venue:</strong> Candeur 40 Lawn, Miyapur</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">👗</span>
+                  <span><strong>Attire:</strong> Bright Yellows & Florals</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#location-hyderabad" class="inline-flex items-center justify-center w-full py-2 px-3 rounded-xl border border-gold text-maroon font-semibold text-xs uppercase tracking-wider hover:bg-gold hover:text-maroon-900 transition-colors">
+              <span>View Venue</span>
+              <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Event 2: Sangeet & Cocktails (Hyderabad) -->
+        <div class="reveal-on-scroll delay-100 bg-white rounded-3xl overflow-hidden border border-gold/40 shadow-royal hover:-translate-y-2 hover:shadow-gold-lg transition-all duration-300 flex flex-col">
+          <div class="h-36 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80');">
+            <div class="absolute inset-0 bg-gradient-to-t from-maroon-900/90 via-maroon-900/30 to-transparent"></div>
+            <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
+              <span class="text-[11px] uppercase tracking-widest bg-gold text-maroon-900 font-bold px-2.5 py-0.5 rounded-full">Hyderabad</span>
+              <span class="text-[11px] font-medium text-cream-100">🪩 Dance Night</span>
+            </div>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-maroon mb-1">Sangeet & Cocktails</h3>
+              <p class="text-[11px] text-charcoal/60 uppercase tracking-wider mb-4">Music, Beats & Glamour</p>
+
+              <div class="space-y-2.5 text-xs text-charcoal/90 mb-5">
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">📅</span>
+                  <span><strong>Date:</strong> Dec 17, 2026</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">⏰</span>
+                  <span><strong>Time:</strong> 07:00 PM onwards</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">📍</span>
+                  <span><strong>Venue:</strong> Candeur 40 Club, Miyapur</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">👗</span>
+                  <span><strong>Attire:</strong> Indo-Western & Shimmer</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#location-hyderabad" class="inline-flex items-center justify-center w-full py-2 px-3 rounded-xl border border-gold text-maroon font-semibold text-xs uppercase tracking-wider hover:bg-gold hover:text-maroon-900 transition-colors">
+              <span>View Venue</span>
+              <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Event 3: The Holy Wedding (Hyderabad) -->
+        <div class="reveal-on-scroll delay-200 bg-white rounded-3xl overflow-hidden border-2 border-gold shadow-gold-lg hover:-translate-y-2 transition-all duration-300 flex flex-col ring-2 ring-gold/20">
+          <div class="h-36 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1519225429871-33161c2a0d18?auto=format&fit=crop&w=800&q=80');">
+            <div class="absolute inset-0 bg-gradient-to-t from-maroon-900/90 via-maroon-900/30 to-transparent"></div>
+            <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
+              <span class="text-[11px] uppercase tracking-widest bg-maroon text-gold font-bold px-2.5 py-0.5 rounded-full border border-gold">Main Wedding</span>
+              <span class="text-[11px] font-medium text-cream-100">🔥 Sacred Vows</span>
+            </div>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-maroon mb-1">The Wedding Ceremony</h3>
+              <p class="text-[11px] text-charcoal/60 uppercase tracking-wider mb-4">Baraat, Muhurtham & Pheras</p>
+
+              <div class="space-y-2.5 text-xs text-charcoal/90 mb-5">
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">📅</span>
+                  <span><strong>Date:</strong> Dec 18, 2026</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">⏰</span>
+                  <span><strong>Time:</strong> Baraat 05 PM | Muhurtham 07 PM</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">📍</span>
+                  <span><strong>Venue:</strong> Candeur 40, Miyapur, Hyd</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">👗</span>
+                  <span><strong>Attire:</strong> Royal Traditional Indian</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#location-hyderabad" class="inline-flex items-center justify-center w-full py-2 px-3 rounded-xl bg-maroon text-gold font-semibold text-xs uppercase tracking-wider hover:bg-maroon-600 transition-colors shadow-sm">
+              <span>View Venue</span>
+              <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Event 4: Grand Reception (Borigumma, Odisha) -->
+        <div class="reveal-on-scroll delay-300 bg-white rounded-3xl overflow-hidden border-2 border-gold shadow-gold-lg hover:-translate-y-2 transition-all duration-300 flex flex-col ring-2 ring-gold/20">
+          <div class="h-36 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80');">
+            <div class="absolute inset-0 bg-gradient-to-t from-maroon-900/90 via-maroon-900/30 to-transparent"></div>
+            <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
+              <span class="text-[11px] uppercase tracking-widest bg-maroon text-gold font-bold px-2.5 py-0.5 rounded-full border border-gold">Odisha</span>
+              <span class="text-[11px] font-medium text-cream-100">👑 Grand Feast</span>
+            </div>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-maroon mb-1">Grand Reception</h3>
+              <p class="text-[11px] text-charcoal/60 uppercase tracking-wider mb-4">Celebratory Feast & Blessings</p>
+
+              <div class="space-y-2.5 text-xs text-charcoal/90 mb-5">
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">📅</span>
+                  <span><strong>Date:</strong> Dec 23, 2026</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">⏰</span>
+                  <span><strong>Time:</strong> 06:30 PM onwards</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">📍</span>
+                  <span><strong>Venue:</strong> Borigumma, Koraput, Odisha</span>
+                </div>
+                <div class="flex items-center space-x-2.5">
+                  <span class="text-maroon">👗</span>
+                  <span><strong>Attire:</strong> Festive Indian / Formal</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#location-odisha" class="inline-flex items-center justify-center w-full py-2 px-3 rounded-xl bg-maroon text-gold font-semibold text-xs uppercase tracking-wider hover:bg-maroon-600 transition-colors shadow-sm">
+              <span>View Venue</span>
+              <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- F. PHOTO GALLERY (PRE-WEDDING / MEMORIES) WITH LIGHTBOX -->
+  <!-- ========================================================================= -->
+  <section id="gallery" class="py-24 sm:py-32 px-4 max-w-6xl mx-auto">
+    
+    <!-- Section Header -->
+    <div class="reveal-on-scroll text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">Captured Moments</span>
+      <h2 class="font-serif text-4xl sm:text-5xl text-maroon mt-2 mb-4 font-bold">Our Memories</h2>
+      <div class="w-20 h-0.5 bg-gold mx-auto mb-4"></div>
+      <p class="font-sans text-sm sm:text-base text-charcoal-muted">
+        Glimpses from our journey together. Drop your own photos into <code class="text-xs bg-cream-200 px-2 py-0.5 rounded text-maroon font-mono">assets/images/</code> to personalize!
+      </p>
+    </div>
+
+    <!-- 6-Image Responsive Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Gallery Item 1 -->
+      <div class="reveal-on-scroll gallery-item group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-gold/30"
+           data-full="assets/images/gallery-1.jpg"
+           data-fallback="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1600&q=85"
+           data-caption="Royal Attire & Traditional Grace">
+        <img src="assets/images/gallery-1.jpg" 
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80';"
+             alt="Pre-wedding photo 1" 
+             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        <div class="absolute inset-0 bg-gradient-to-t from-maroon-900/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+          <span class="text-xs uppercase tracking-widest text-gold font-semibold">Pre-Wedding</span>
+          <h4 class="font-serif text-lg font-bold">Royal Attire & Grace</h4>
+        </div>
+      </div>
+
+      <!-- Gallery Item 2 -->
+      <div class="reveal-on-scroll delay-100 gallery-item group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-gold/30"
+           data-full="assets/images/gallery-2.jpg"
+           data-fallback="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1600&q=85"
+           data-caption="A Quiet Stroll at Sunset">
+        <img src="assets/images/gallery-2.jpg" 
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80';"
+             alt="Pre-wedding photo 2" 
+             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        <div class="absolute inset-0 bg-gradient-to-t from-maroon-900/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+          <span class="text-xs uppercase tracking-widest text-gold font-semibold">Golden Hour</span>
+          <h4 class="font-serif text-lg font-bold">A Quiet Stroll at Sunset</h4>
+        </div>
+      </div>
+
+      <!-- Gallery Item 3 -->
+      <div class="reveal-on-scroll delay-200 gallery-item group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-gold/30"
+           data-full="assets/images/gallery-3.jpg"
+           data-fallback="https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?auto=format&fit=crop&w=1600&q=85"
+           data-caption="Fragrance of Marigold & Henna">
+        <img src="assets/images/gallery-3.jpg" 
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?auto=format&fit=crop&w=800&q=80';"
+             alt="Pre-wedding photo 3" 
+             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        <div class="absolute inset-0 bg-gradient-to-t from-maroon-900/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+          <span class="text-xs uppercase tracking-widest text-gold font-semibold">Traditions</span>
+          <h4 class="font-serif text-lg font-bold">Fragrance of Marigold</h4>
+        </div>
+      </div>
+
+      <!-- Gallery Item 4 -->
+      <div class="reveal-on-scroll gallery-item group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-gold/30"
+           data-full="assets/images/gallery-4.jpg"
+           data-fallback="https://images.unsplash.com/photo-1545232979-8bf68ee9b1af?auto=format&fit=crop&w=1600&q=85"
+           data-caption="The Promise of Forever">
+        <img src="assets/images/gallery-4.jpg" 
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545232979-8bf68ee9b1af?auto=format&fit=crop&w=800&q=80';"
+             alt="Pre-wedding photo 4" 
+             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        <div class="absolute inset-0 bg-gradient-to-t from-maroon-900/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+          <span class="text-xs uppercase tracking-widest text-gold font-semibold">The Ring</span>
+          <h4 class="font-serif text-lg font-bold">The Promise of Forever</h4>
+        </div>
+      </div>
+
+      <!-- Gallery Item 5 -->
+      <div class="reveal-on-scroll delay-100 gallery-item group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-gold/30"
+           data-full="assets/images/gallery-5.jpg"
+           data-fallback="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85"
+           data-caption="Celebrations & Sparkling Lights">
+        <img src="assets/images/gallery-5.jpg" 
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80';"
+             alt="Pre-wedding photo 5" 
+             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        <div class="absolute inset-0 bg-gradient-to-t from-maroon-900/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+          <span class="text-xs uppercase tracking-widest text-gold font-semibold">Festive Glow</span>
+          <h4 class="font-serif text-lg font-bold">Sparkling Lights & Joy</h4>
+        </div>
+      </div>
+
+      <!-- Gallery Item 6 -->
+      <div class="reveal-on-scroll delay-200 gallery-item group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-gold/30"
+           data-full="assets/images/gallery-6.jpg"
+           data-fallback="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1600&q=85"
+           data-caption="Laughter, Joy & Endless Love">
+        <img src="assets/images/gallery-6.jpg" 
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80';"
+             alt="Pre-wedding photo 6" 
+             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        <div class="absolute inset-0 bg-gradient-to-t from-maroon-900/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+          <span class="text-xs uppercase tracking-widest text-gold font-semibold">Pure Joy</span>
+          <h4 class="font-serif text-lg font-bold">Laughter & Endless Love</h4>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Gallery Lightbox Modal -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/95 hidden items-center justify-center p-4 backdrop-blur-md transition-all duration-300">
+    <button id="lightbox-close" aria-label="Close Gallery Modal" class="absolute top-6 right-6 text-cream-100 hover:text-gold p-2 z-50 focus:outline-none transition-colors">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <button id="lightbox-prev" aria-label="Previous Image" class="absolute left-4 top-1/2 -translate-y-1/2 text-cream-100 hover:text-gold p-3 bg-black/40 hover:bg-black/70 rounded-full z-50 border border-gold/40 transition-all focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <button id="lightbox-next" aria-label="Next Image" class="absolute right-4 top-1/2 -translate-y-1/2 text-cream-100 hover:text-gold p-3 bg-black/40 hover:bg-black/70 rounded-full z-50 border border-gold/40 transition-all focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+
+    <div class="relative max-w-5xl max-h-[85vh] flex flex-col items-center">
+      <img id="lightbox-image" src="" alt="Enlarged gallery photo" class="max-h-[75vh] w-auto max-w-full rounded-xl object-contain shadow-2xl border border-gold/40" />
+      <div class="mt-4 text-center">
+        <p id="lightbox-caption" class="text-cream-50 font-serif text-lg tracking-wide"></p>
+        <p id="lightbox-counter" class="text-gold text-xs tracking-widest mt-1 font-sans uppercase"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- G. VENUE & MAP LOCATIONS (HYDERABAD & ODISHA) -->
+  <!-- ========================================================================= -->
+  <section id="location" class="py-24 bg-cream-200/50 border-t border-gold/30 px-4">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="reveal-on-scroll text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-[0.3em] text-maroon font-semibold">The Destinations</span>
+        <h2 class="font-serif text-4xl sm:text-5xl text-charcoal mt-2 mb-4 font-bold">Venues & Directions</h2>
+        <div class="w-20 h-0.5 bg-gold mx-auto mb-4"></div>
+        <p class="font-sans text-sm sm:text-base text-charcoal-muted">
+          Our wedding celebrations will be held across two special places: Hyderabad for the Wedding rituals and Borigumma, Odisha for the Grand Reception.
+        </p>
+      </div>
+
+      <!-- VENUE 1: HYDERABAD (MARRIAGE VENUE) -->
+      <div id="location-hyderabad" class="mb-16">
+        <div class="reveal-on-scroll flex items-center space-x-3 mb-6">
+          <span class="w-8 h-8 rounded-full bg-maroon text-gold flex items-center justify-center font-bold text-sm">1</span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-maroon">Hyderabad — The Wedding Venue (Dec 18, 2026)</h3>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          <!-- Venue Card: Candeur 40 -->
+          <div class="reveal-on-scroll lg:col-span-5 bg-white rounded-3xl p-8 border border-gold/40 shadow-royal flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-gold/15 text-maroon flex items-center justify-center text-2xl mb-5">
+                🏰
+              </div>
+              
+              <span class="text-xs font-bold uppercase tracking-widest text-gold-dark">Marriage & Haldi / Sangeet Venue</span>
+              <h4 class="font-serif text-3xl font-bold text-maroon mt-1 mb-2">Candeur 40</h4>
+              <p class="text-xs font-medium text-maroon-700 uppercase tracking-wider mb-4">Miyapur, Hyderabad, Telangana</p>
+              
+              <p class="text-xs sm:text-sm text-charcoal/80 leading-relaxed mb-6 font-sans">
+                Candeur 40, Near Miyapur Metro Station, Miyapur, Hyderabad, Telangana 500049.
+              </p>
+
+              <div class="border-t border-gold/20 pt-5 space-y-3.5 text-xs sm:text-sm text-charcoal/80">
+                <div class="flex items-start space-x-3">
+                  <span class="text-gold text-base">🚇</span>
+                  <div>
+                    <strong class="block text-charcoal">Nearest Metro:</strong>
+                    Miyapur Metro Station (Red Line) — approx. 2 km.
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <span class="text-gold text-base">✈️</span>
+                  <div>
+                    <strong class="block text-charcoal">Nearest Airport:</strong>
+                    Rajiv Gandhi International Airport (HYD) — via ORR (approx. 40 km).
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <span class="text-gold text-base">🚗</span>
+                  <div>
+                    <strong class="block text-charcoal">Landmarks & Parking:</strong>
+                    Near Miyapur X Roads. Dedicated guest parking available.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Get Directions Button -->
+            <div class="mt-8 pt-5 border-t border-gold/20">
+              <a href="https://maps.google.com/?q=Candeur+40+Miyapur+Hyderabad" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="inline-flex items-center justify-center w-full py-3.5 px-6 rounded-full bg-maroon text-gold font-semibold text-xs uppercase tracking-widest hover:bg-maroon-600 transition-all duration-300 shadow-md">
+                <span>Directions to Candeur 40</span>
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Embedded Google Maps Container for Candeur 40 -->
+          <div class="reveal-on-scroll delay-100 lg:col-span-7 bg-white rounded-3xl p-3 border border-gold/40 shadow-royal overflow-hidden min-h-[360px] flex">
+            <iframe 
+              src="https://maps.google.com/maps?q=Candeur%2040%20Miyapur%20Hyderabad&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style="border:0; border-radius: 1.25rem; min-height: 360px;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Google Maps Location of Candeur 40 Miyapur">
+            </iframe>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VENUE 2: BORIGUMMA, ODISHA (RECEPTION VENUE) -->
+      <div id="location-odisha" class="pt-8 border-t border-gold/30">
+        <div class="reveal-on-scroll flex items-center space-x-3 mb-6">
+          <span class="w-8 h-8 rounded-full bg-maroon text-gold flex items-center justify-center font-bold text-sm">2</span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-maroon">Odisha — Grand Reception (Dec 23, 2026)</h3>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          <!-- Venue Card: Borigumma -->
+          <div class="reveal-on-scroll lg:col-span-5 bg-white rounded-3xl p-8 border border-gold/40 shadow-royal flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-gold/15 text-maroon flex items-center justify-center text-2xl mb-5">
+                🎉
+              </div>
+              
+              <span class="text-xs font-bold uppercase tracking-widest text-gold-dark">Celebratory Reception Venue</span>
+              <h4 class="font-serif text-3xl font-bold text-maroon mt-1 mb-2">Borigumma Celebration Grounds</h4>
+              <p class="text-xs font-medium text-maroon-700 uppercase tracking-wider mb-4">Koraput District, Odisha</p>
+              
+              <p class="text-xs sm:text-sm text-charcoal/80 leading-relaxed mb-6 font-sans">
+                NH-26 / NH-201 Junction, Borigumma, Koraput District, Odisha 764056.
+              </p>
+
+              <div class="border-t border-gold/20 pt-5 space-y-3.5 text-xs sm:text-sm text-charcoal/80">
+                <div class="flex items-start space-x-3">
+                  <span class="text-gold text-base">🚆</span>
+                  <div>
+                    <strong class="block text-charcoal">Nearest Railway Station:</strong>
+                    Jeypore Railway Station (JYP) — approx. 20 km / Koraput (KRPU) ~ 45 km.
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <span class="text-gold text-base">✈️</span>
+                  <div>
+                    <strong class="block text-charcoal">Nearest Airports:</strong>
+                    Jeypore Airport (PYB) ~ 20 km / Visakhapatnam (VTZ) ~ 220 km.
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <span class="text-gold text-base">🚗</span>
+                  <div>
+                    <strong class="block text-charcoal">Connectivity:</strong>
+                    Well connected along NH-26 (Raipur-Visakhapatnam Highway).
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Get Directions Button -->
+            <div class="mt-8 pt-5 border-t border-gold/20">
+              <a href="https://maps.google.com/?q=Borigumma+Koraput+Odisha" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="inline-flex items-center justify-center w-full py-3.5 px-6 rounded-full bg-maroon text-gold font-semibold text-xs uppercase tracking-widest hover:bg-maroon-600 transition-all duration-300 shadow-md">
+                <span>Directions to Borigumma</span>
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Embedded Google Maps Container for Borigumma -->
+          <div class="reveal-on-scroll delay-100 lg:col-span-7 bg-white rounded-3xl p-3 border border-gold/40 shadow-royal overflow-hidden min-h-[360px] flex">
+            <iframe 
+              src="https://maps.google.com/maps?q=Borigumma%20Koraput%20Odisha&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style="border:0; border-radius: 1.25rem; min-height: 360px;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Google Maps Location of Borigumma Odisha">
+            </iframe>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- H. FOOTER -->
+  <!-- ========================================================================= -->
+  <footer class="bg-maroon-900 text-cream-50 pt-16 pb-12 px-4 border-t-2 border-gold relative overflow-hidden">
+    
+    <!-- Background Motif -->
+    <div class="absolute inset-0 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:20px_20px] opacity-10 pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
+      
+      <!-- Couple Names -->
+      <h2 class="font-script text-5xl sm:text-6xl text-gold mb-2">Kavu & Jiju</h2>
+      
+      <!-- Couple Hashtag -->
+      <div class="inline-block px-5 py-1.5 rounded-full bg-gold/15 border border-gold/40 text-gold-200 text-sm font-semibold tracking-wider my-3">
+        #KavuWedsJiju
+      </div>
+
+      <!-- Warm Closing Note -->
+      <p class="font-serif text-xl sm:text-2xl text-cream-100 italic mt-3 mb-6 max-w-lg">
+        "Can't wait to celebrate with you!"
+      </p>
+
+      <div class="w-16 h-px bg-gold/40 mb-8"></div>
+
+      <!-- Navigation links recap -->
+      <div class="flex flex-wrap justify-center gap-6 text-xs uppercase tracking-widest text-cream-300 font-medium mb-10">
+        <a href="#hero" class="hover:text-gold transition">Home</a>
+        <a href="#story" class="hover:text-gold transition">Our Story</a>
+        <a href="#events" class="hover:text-gold transition">Events</a>
+        <a href="#gallery" class="hover:text-gold transition">Gallery</a>
+        <a href="#location" class="hover:text-gold transition">Venues</a>
+      </div>
+
+      <!-- Copyright & Family Blessings -->
+      <div class="text-[11px] text-cream-300/60 font-sans tracking-wider space-y-1">
+        <p>Crafted with love for Kavu & Jiju's Wedding • Hyderabad & Odisha • December 2026</p>
+        <p>With warm blessings from both families</p>
+      </div>
+
+      <!-- Back to Top Button -->
+      <a href="#hero" aria-label="Back to Top" class="mt-8 w-10 h-10 rounded-full border border-gold/40 bg-maroon/60 flex items-center justify-center text-gold hover:bg-gold hover:text-maroon-900 transition-all">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </a>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- I. JAVASCRIPT: LOGIC, ANIMATIONS, AUDIO, COUNTDOWN, LIGHTBOX -->
+  <!-- ========================================================================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Check for local hero image
+      const heroTest = new Image();
+      heroTest.onload = () => {
+        const heroBg = document.getElementById('hero-bg');
+        if (heroBg) {
+          heroBg.style.backgroundImage = "url('assets/images/hero.jpg')";
+        }
+      };
+      heroTest.src = 'assets/images/hero.jpg';
+
+      // -----------------------------------------------------------------------
+      // 1. FLOATING PETALS & SPARKLES CANVAS ANIMATION
+      // -----------------------------------------------------------------------
+      const canvas = document.getElementById('petals-canvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      const particleCount = 28;
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      const petalColors = [
+        'rgba(212, 175, 55, 0.6)',  // Gold
+        'rgba(243, 229, 171, 0.5)', // Light Gold
+        'rgba(226, 88, 34, 0.4)',   // Marigold Orange
+        'rgba(199, 0, 57, 0.35)',   // Rose Red
+      ];
+
+      class Particle {
+        constructor() {
+          this.reset(true);
+        }
+        reset(initial = false) {
+          this.x = Math.random() * canvas.width;
+          this.y = initial ? Math.random() * canvas.height : -20;
+          this.size = Math.random() * 8 + 4;
+          this.speedY = Math.random() * 0.8 + 0.4;
+          this.speedX = Math.random() * 0.6 - 0.3;
+          this.rotation = Math.random() * Math.PI * 2;
+          this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+          this.color = petalColors[Math.floor(Math.random() * petalColors.length)];
+          this.swing = Math.random() * 2;
+          this.swingSpeed = Math.random() * 0.02 + 0.01;
+          this.angle = Math.random() * Math.PI * 2;
+        }
+        update() {
+          this.y += this.speedY;
+          this.angle += this.swingSpeed;
+          this.x += Math.sin(this.angle) * 0.5 + this.speedX;
+          this.rotation += this.rotationSpeed;
+
+          if (this.y > canvas.height + 20 || this.x < -20 || this.x > canvas.width + 20) {
+            this.reset();
+          }
+        }
+        draw() {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.rotation);
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size, this.size * 0.55, 0, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+
+      // -----------------------------------------------------------------------
+      // 2. BACKGROUND WEDDING MUSIC CONTROLLER (AUTOPLAY BY DEFAULT)
+      // -----------------------------------------------------------------------
+      const audio = document.getElementById('wedding-audio');
+      const audioBtn = document.getElementById('audio-toggle-btn');
+      const soundOnIcon = document.getElementById('icon-sound-on');
+      const soundOffIcon = document.getElementById('icon-sound-off');
+      const audioPulse = document.getElementById('audio-pulse');
+      const audioTooltip = document.getElementById('audio-tooltip');
+      const musicBanner = document.getElementById('music-banner');
+      let isPlaying = false;
+
+      function updateAudioUI(playing) {
+        isPlaying = playing;
+        if (playing) {
+          soundOnIcon.classList.remove('hidden');
+          soundOffIcon.classList.add('hidden');
+          audioPulse.classList.remove('opacity-0');
+          audioPulse.classList.add('animate-ping');
+          if (musicBanner) musicBanner.classList.add('hidden');
+        } else {
+          soundOnIcon.classList.add('hidden');
+          soundOffIcon.classList.remove('hidden');
+          audioPulse.classList.add('opacity-0');
+          audioPulse.classList.remove('animate-ping');
+        }
+      }
+
+      function playMusic() {
+        if (!audio) return;
+        audio.muted = false;
+        audio.volume = 1.0;
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            updateAudioUI(true);
+          }).catch(err => {
+            updateAudioUI(false);
+            if (musicBanner) musicBanner.classList.remove('hidden');
+            console.log('Autoplay deferred until initial interaction:', err);
+          });
+        }
+      }
+
+      function pauseMusic() {
+        if (!audio) return;
+        audio.pause();
+        updateAudioUI(false);
+      }
+
+      // Try autoplaying immediately when page opens
+      playMusic();
+
+      // Whenever user clicks, taps, or presses any key anywhere on the page, start music if paused!
+      function onAnyInteraction() {
+        if (audio && audio.paused) {
+          playMusic();
+        }
+      }
+
+      ['click', 'pointerdown', 'touchstart', 'keydown'].forEach(evt => {
+        window.addEventListener(evt, onAnyInteraction, { passive: true });
+        document.addEventListener(evt, onAnyInteraction, { passive: true });
+      });
+
+      // Banner click also directly starts music
+      if (musicBanner) {
+        musicBanner.addEventListener('click', (e) => {
+          e.stopPropagation();
+          playMusic();
+        });
+      }
+
+      // Show tooltip briefly if not playing yet
+      setTimeout(() => {
+        if (!isPlaying && audioTooltip) {
+          audioTooltip.classList.remove('hidden');
+          audioTooltip.classList.remove('opacity-0');
+          setTimeout(() => {
+            audioTooltip.classList.add('opacity-0');
+            setTimeout(() => audioTooltip.classList.add('hidden'), 300);
+          }, 4500);
+        }
+      }, 1500);
+
+      // Manual audio toggle button
+      audioBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isPlaying) {
+          pauseMusic();
+        } else {
+          playMusic();
+        }
+      });
+
+      // -----------------------------------------------------------------------
+      // 3. RESPONSIVE MOBILE NAVIGATION
+      // -----------------------------------------------------------------------
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const hamburgerIcon = document.getElementById('hamburger-icon');
+      const closeIcon = document.getElementById('close-icon');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+      function toggleMobileMenu() {
+        const isClosed = mobileMenu.classList.contains('hidden');
+        if (isClosed) {
+          mobileMenu.classList.remove('hidden');
+          hamburgerIcon.classList.add('hidden');
+          closeIcon.classList.remove('hidden');
+        } else {
+          mobileMenu.classList.add('hidden');
+          hamburgerIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        }
+      }
+
+      mobileBtn.addEventListener('click', toggleMobileMenu);
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          hamburgerIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        });
+      });
+
+      // -----------------------------------------------------------------------
+      // 4. LIVE COUNTDOWN TIMER (DECEMBER 18, 2026 - WEDDING IN HYDERABAD)
+      // -----------------------------------------------------------------------
+      const weddingDate = new Date('2026-12-18T10:00:00').getTime();
+
+      const daysEl = document.getElementById('timer-days');
+      const hoursEl = document.getElementById('timer-hours');
+      const minsEl = document.getElementById('timer-minutes');
+      const secsEl = document.getElementById('timer-seconds');
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const difference = weddingDate - now;
+
+        if (difference > 0) {
+          const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+          daysEl.textContent = String(days).padStart(2, '0');
+          hoursEl.textContent = String(hours).padStart(2, '0');
+          minsEl.textContent = String(minutes).padStart(2, '0');
+          secsEl.textContent = String(seconds).padStart(2, '0');
+        } else {
+          daysEl.textContent = '00';
+          hoursEl.textContent = '00';
+          minsEl.textContent = '00';
+          secsEl.textContent = '00';
+        }
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      // -----------------------------------------------------------------------
+      // 5. SCROLL REVEAL ANIMATIONS (INTERSECTION OBSERVER)
+      // -----------------------------------------------------------------------
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+
+      // -----------------------------------------------------------------------
+      // 6. PHOTO GALLERY LIGHTBOX MODAL
+      // -----------------------------------------------------------------------
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      const lightboxModal = document.getElementById('lightbox-modal');
+      const lightboxImg = document.getElementById('lightbox-image');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const lightboxCounter = document.getElementById('lightbox-counter');
+      const lightboxClose = document.getElementById('lightbox-close');
+      const lightboxPrev = document.getElementById('lightbox-prev');
+      const lightboxNext = document.getElementById('lightbox-next');
+
+      let currentGalleryIndex = 0;
+      const galleryData = Array.from(galleryItems).map(item => ({
+        src: item.querySelector('img').src,
+        caption: item.getAttribute('data-caption')
+      }));
+
+      function showLightbox(index) {
+        currentGalleryIndex = index;
+        const item = galleryData[currentGalleryIndex];
+        lightboxImg.src = item.src;
+        lightboxCaption.textContent = item.caption;
+        lightboxCounter.textContent = `Photo ${currentGalleryIndex + 1} of ${galleryData.length}`;
+        lightboxModal.classList.remove('hidden');
+        lightboxModal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+      }
+
+      function hideLightbox() {
+        lightboxModal.classList.add('hidden');
+        lightboxModal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+      }
+
+      function showPrevImage() {
+        currentGalleryIndex = (currentGalleryIndex - 1 + galleryData.length) % galleryData.length;
+        showLightbox(currentGalleryIndex);
+      }
+
+      function showNextImage() {
+        currentGalleryIndex = (currentGalleryIndex + 1) % galleryData.length;
+        showLightbox(currentGalleryIndex);
+      }
+
+      galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => showLightbox(index));
+      });
+
+      lightboxClose.addEventListener('click', hideLightbox);
+      lightboxPrev.addEventListener('click', showPrevImage);
+      lightboxNext.addEventListener('click', showNextImage);
+
+      lightboxModal.addEventListener('click', (e) => {
+        if (e.target === lightboxModal) hideLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightboxModal.classList.contains('hidden')) {
+          if (e.key === 'Escape') hideLightbox();
+          if (e.key === 'ArrowLeft') showPrevImage();
+          if (e.key === 'ArrowRight') showNextImage();
+        }
+      });
+
+    });
+  </script>
+
+</body>
+</html>
